@@ -68,7 +68,8 @@ def find_avg(arr):
 
     print(avg_in_list)
 
-
+    
+# вывести на экран пустой квадрат из "*" сторона которого указана в переменой
 def stars(height, width):
     if width < 3:
         width = 3
