@@ -33,25 +33,39 @@ def find_avg(arr):
     divider = 0
     for el in arr:
         if type(el) == int:
-            if el > 0:
-                sum_of_elements += el
-                divider += 1
+            sum_of_elements += el
+            divider += 1
     avg = sum_of_elements / divider
     avg_in_list_dif = sum_of_elements
     avg_in_list = 0
     for el in arr:
-        if el > avg:
-            diff = el - avg
-            if diff < avg_in_list_dif:
-                avg_in_list_dif = diff
+        if el > 0:
+            if el > avg:
+                diff = el - avg
+                if diff < avg_in_list_dif:
+                    avg_in_list_dif = diff
+                    avg_in_list = el
+            elif avg > el:
+                diff = avg - el
+                if diff < avg_in_list_dif:
+                    avg_in_list_dif = diff
+                    avg_in_list = el
+            else:
                 avg_in_list = el
-        elif avg > el:
-            diff = avg - el
-            if diff < avg_in_list_dif:
-                avg_in_list_dif = diff
+        elif el < 0:
+            if el < avg:
+                diff = (avg-avg*2) - (el-el*2)
+                if diff < avg_in_list_dif:
+                    avg_in_list_dif = diff - diff * 2
+                    avg_in_list = el
+            elif avg < el:
+                diff = (el-el*2) - (avg-avg*2)
+                if diff < avg_in_list_dif:
+                    avg_in_list_dif = diff - diff * 2
+                    avg_in_list = el
+            else:
                 avg_in_list = el
-        else:
-            avg_in_list = el
+
     print(avg_in_list)
 
 
@@ -89,7 +103,8 @@ def table():
 numbers1 = [22, 3, 5, 2, 8, 2, -23, 8, 23, 5]
 numbers2 = [-1, -2, 3, 4, 555]
 numbers3 = [5, 5, 5, 5]
-numbers4 = [-10, 5, 5]
+numbers4 = [-10, -10, 5, 10]
+numbers5 = [-500, -1000, -750, -250, 0]
 
 
 def menu(arr):
@@ -135,6 +150,6 @@ def menu(arr):
                 break
 
 
-menu(numbers1)
+
 
 
