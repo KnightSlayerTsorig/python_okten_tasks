@@ -124,14 +124,8 @@ def func_avg_list(array):
 
 def decor(func):
     def wrapper():
-        old_result = func()
-        new_result = ''
-        for el in old_result:
-            if el == '_':
-                new_result += ' '
-            else:
-                new_result += el
-        return new_result
+        result = func().replace('_', ' ')
+        return result
     return wrapper
 
 
@@ -140,3 +134,5 @@ def pr():
     return 'Hello_boss_!!!'
 
 
+a = pr()
+print(a)
