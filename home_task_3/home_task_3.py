@@ -38,41 +38,64 @@ class Rectangle:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.square = x * y
+        self.s = x * y
 
     def __len__(self):
         print(2 * (self.x + self.y))
         return 2 * (self.x + self.y)
 
-    def sum_of_squares(self, square_inner):
-        sum_squares = self.square + square_inner
-        print(f'Sum: {sum_squares}.')
+    def __repr__(self):
+        return self.s
+    
+    def __str__(self):
+        return str(self.s)
 
-    def difference(self, square_inner):
-        diff = max(self.square, square_inner) - min(self.square, square_inner)
-        if diff == 0:
-            print(f'Square of first rectangle {self.square} is equal to the square of second rectangle {square_inner}.')
+    def __add__(self, other):
+        result = self.s + int(other.__repr__())
+        print(f'SUM: {result}')
+        return result
+
+    def __sub__(self, other):
+        diff = abs(self.s - int(other.__repr__()))
+        print(f'Difference: {diff}')
+        return diff
+
+    def __eq__(self, other):
+        if self.s == other:
+            a = f'{self.s} and {other} are equal'
         else:
-            print(f'Difference between rectangles squares: {diff}.')
+            a = f'{self.s} and {other} are not equal'
+        return a
 
-    def equal(self, square_inner):
-        diff = self.square - square_inner
-        if diff == 0:
-            print(f'Square of first rectangle {self.square} is equal to the square of second rectangle {square_inner}.')
-
-    def not_equal(self, square_inner):
-        diff = self.square - square_inner
-        if diff != 0:
-            print(f'This rectangle not equal {self.square} != {square_inner}.')
-
-    def bigger_smaller(self, square_inner):
-        if self.square > square_inner:
-            print(f'This rectangle square: {self.square} is bigger then other rectangle square: {square_inner}.')
-        elif self.square < square_inner:
-            print(f'This rectangle square: {self.square} is smaller then other rectangle square: {square_inner}.')
+    def __ne__(self, other):
+        if self.s != other:
+            a = f'{self.s} and {other} are not equal'
         else:
-            print(f'Square of first rectangle {self.square} is equal to the square of second rectangle {square_inner}.')
+            a = f'{self.s} and {other} are equal'
+        return a
 
+    def __lt__(self, other):
+        if self.s < other:
+            a = f'{self.s} is smaller then {other}'
+        elif self.s > other:
+            a = f'{self.s} is bigger then {other}'
+        else:
+            a = self.__eq__(other)
+        return a
+
+    def __gt__(self, other):
+        if self.s > other:
+            a = f'{self.s} is bigger then {other}'
+        elif self.s < other:
+            a = f'{self.s} is smaller then {other}'
+        else:
+            a = self.__eq__(other)
+        return a
+
+
+#####################################
+#               TEST                #
+#####################################
 
 first_rect = Rectangle(12, 6)
 second_rect = Rectangle(12, 6)
@@ -82,17 +105,21 @@ fourth_rect = Rectangle(4, 2)
 
 first_rect.__len__()
 
-first_rect.sum_of_squares(second_rect.square)
+first_rect + second_rect
+first_rect + 244
 
-first_rect.difference(second_rect.square)
-first_rect.difference(third_rect.square)
-first_rect.difference(fourth_rect.square)
+first_rect - fourth_rect
+first_rect - 44
 
-first_rect.equal(second_rect.square)
 
-first_rect.not_equal(third_rect.square)
+print(first_rect == fourth_rect)
+print(first_rect != fourth_rect)
+print(first_rect == second_rect)
 
-first_rect.bigger_smaller(third_rect.square)
-first_rect.bigger_smaller(fourth_rect.square)
-first_rect.bigger_smaller(second_rect.square)
 
+print(first_rect > 40)
+print(first_rect > 100)
+print(first_rect > 72)
+print(first_rect < 40)
+print(first_rect < 100)
+print(first_rect < 72)
